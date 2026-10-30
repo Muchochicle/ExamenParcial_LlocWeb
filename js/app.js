@@ -40,7 +40,7 @@ window.onload = async () => {
         });
         midapers++;
   }
-};
+}
 async function mostrarFitxa(url) {
   const contingut = document.getElementById('contingut-fitxa');
   contingut.textContent = '';
@@ -72,17 +72,6 @@ function pintarPersonatge(personat, caixa) {
   for (const edat of personat.age) {
     textTip += ' ' + edat.age.name;
   }
-  const pEdat = document.createElement('p');
-  pTipus.textContent = textTipus;
-  caixa.appendChild(pEdat);
-
-    let textTipus = 'Estat: ';
-  for (const state of personat.status) {
-    textTipus += ' ' + state.status.name;
-  }
-  const pEstat = document.createElement('p');
-  pTipus.textContent = textTipus;
-  caixa.appendChild(pEstat);
 }
 async function afegirCapturats(url) {
   const missatge = document.getElementById('missatge-capturats');
@@ -100,4 +89,5 @@ async function afegirCapturats(url) {
     llista.removeChild(nouLi);
     missatge.textContent = '';
   });
+}
 }

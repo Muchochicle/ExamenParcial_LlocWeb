@@ -58,13 +58,20 @@ section {
   margin: 4px 0 0 0;
 }
 #llista-capturats,
-#llista-recompenses {
+#llista-recompenses,
+#resultats-cerca {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+#resultats-cerca li {
+  border: 1px solid var(--color-vora);
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
 }
 #llista-recompenses li {
   border: 1px solid var(--color-vora);
@@ -111,5 +118,35 @@ section {
 #contingut-fitxa {
   text-align: center;
 }
+#llista-recompenses img {
+  width:150px;
+}
+
+@media (max-width: 600px) {
+  .columnes {
+    flex-direction: column;              
+  }
+
+  #fitxa {
+    width: auto;                         
+  }
+
+  #llista-capturats li {
+    width: 70px;
+  }
+
+  #llista-capturats img {
+    width: 40px;
+  }
+
+  #llista-capturats h3 {
+    font-size: 0.7rem;              
+  }
+}
+#contingut-fitxa ul {
+  text-align: left;
+}
+
+
 
 
