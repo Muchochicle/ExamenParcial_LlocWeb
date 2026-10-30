@@ -6,7 +6,7 @@ let guanyat = 0;
 window.onload = async () => {
     const inputNom = document.getElementById('nom-personatges');
     const botoCercar = document.getElementById('boto-cercar');
-    botoCercar.addEventListener('click', () => {}
+    botoCercar.addEventListener('click', () => {
     const nom = inputNom.value.trim();
     if (nom === '') {
       document.getElementById('contingut-fitxa').textContent = 'Escriu un nom';
@@ -38,6 +38,7 @@ window.onload = async () => {
         });
         midapers++;
   }
+};
 
 async function mostrarFitxa(url) {
   const contingut = document.getElementById('contingut-fitxa');
@@ -73,6 +74,7 @@ async function afegirCapturats(url) {
   missatge.textContent = '';
   const resposta = await fetch(url);
   const p = await resposta.json();
+  guanyat += p.bounties;
   const llista = document.getElementById('llista-capturats');
   const nouLi = document.createElement('li');
   pintarPersonatge(p, nouLi);
@@ -82,6 +84,10 @@ async function afegirCapturats(url) {
   nouLi.appendChild(botoTreure);
   botoTreure.addEventListener('click', () => {
     llista.removeChild(nouLi);
+     total -= producte.price;
+    if (midaProductes === 0) {
+      guanyat = 0;
+    }
     missatge.textContent = '';
   });
 }
