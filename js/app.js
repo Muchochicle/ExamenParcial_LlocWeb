@@ -1,8 +1,9 @@
 console.log('loaded');
-const URL_LLISTA = 'http://localhost:3000/api/onepiece/characters';
+const URL_L = 'http://localhost:3000/api/onepiece/characters';
 const URL_BOUNTIES = 'https://www.onepieceapi.com/api/bounties';
 const MAX_BOUNTIES = 10;
 let midapers = 0;
+let guanyat = 0;
 window.onload = async () => {
     const inputNom = document.getElementById('nom-personatges');
     const botoCercar = document.getElementById('boto-cercar');
@@ -21,7 +22,7 @@ window.onload = async () => {
     }
   });
     const llistaRecompenses = document.getElementById('llista-recompenses');
-    const resposta = await fetch(URL_LLISTA);
+    const resposta = await fetch(URL_L);
     const dades = await resposta.json();
     console.log(dades);
     const personatges = dades;
@@ -67,21 +68,36 @@ function pintarPersonatge(personat, caixa) {
   imatge.alt = personat.name;
   imatge.width = 250;
   caixa.appendChild(imatge);
-  let textTipus = 'Edat:';
+  let textTip = 'Edat:';
   for (const edat of personat.age) {
-    textTipus += ' ' + edat.age.name;
+    textTip += ' ' + edat.age.name;
   }
   const pEdat = document.createElement('p');
   pTipus.textContent = textTipus;
   caixa.appendChild(pEdat);
 
     let textTipus = 'Estat: ';
-  for (const edat of personat.age) {
-    textTipus += ' ' + edat.age.name;
+  for (const state of personat.status) {
+    textTipus += ' ' + state.status.name;
   }
-  const pEdat = document.createElement('p');
+  const pEstat = document.createElement('p');
   pTipus.textContent = textTipus;
-  caixa.appendChild(pEdat);
+  caixa.appendChild(pEstat);
 }
-
-
+async function afegirCapturats(url) {
+  const missatge = document.getElementById('missatge-capturats');
+  missatge.textContent = '';
+  const resposta = await fetch(url);
+  const p = await resposta.json();
+  const llista = document.getElementById('llista-capturats');
+  const nouLi = document.createElement('li');
+  pintarPersonatge(p, nouLi);
+  llista.appendChild(nouLi);
+  const botoTreure = document.createElement('button');
+  botoTreure.textContent = 'Treure';
+  nouLi.appendChild(botoTreure);
+  botoTreure.addEventListener('click', () => {
+    llista.removeChild(nouLi);
+    missatge.textContent = '';
+  });
+}
