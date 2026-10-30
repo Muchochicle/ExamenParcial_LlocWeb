@@ -1,0 +1,21 @@
+:root {
+  --color-principal: #cee661;
+  --color-fons: #f4f4f4;
+  --color-targeta: #ffffff;
+  --color-vora: #dddddd;
+  --color-hover: #ffe5e5;
+  --font-principal: Arial, sans-serif;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+body {
+  margin: 0;                              
+  font-family: var(--font-principal);
+  background-color: var(--color-fons);
+}
