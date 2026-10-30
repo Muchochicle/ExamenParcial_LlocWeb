@@ -1,21 +1,19 @@
 console.log('loaded');
 const URL_L = 'http://localhost:3000/api/onepiece/characters';
-const URL_BOUNTIES = 'https://www.onepieceapi.com/api/bounties';
-const MAX_BOUNTIES = 10;
+const MAX_PERS = 10;
 let midapers = 0;
 let guanyat = 0;
 window.onload = async () => {
     const inputNom = document.getElementById('nom-personatges');
     const botoCercar = document.getElementById('boto-cercar');
-    botoCercar.addEventListener('click', () => {
+    botoCercar.addEventListener('click', () => {}
     const nom = inputNom.value.trim();
     if (nom === '') {
       document.getElementById('contingut-fitxa').textContent = 'Escriu un nom';
       return;
     }
-    //mostrarFitxa()
-    
-
+    mostrarResultat(URL_L)
+  )}
     inputNom.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       botoCercar.click()
@@ -36,11 +34,11 @@ window.onload = async () => {
         nouLi.appendChild(botoAfegir);
         botoAfegir.addEventListener('click', (event) => {
         event.stopPropagation();
-        afegirCapturats(URL_LLISTA.name[midapers]);
+        afegirCapturats(URL_L.name[midapers]);
         });
         midapers++;
   }
-}
+
 async function mostrarFitxa(url) {
   const contingut = document.getElementById('contingut-fitxa');
   contingut.textContent = '';
@@ -108,7 +106,7 @@ function mostrarEstat(producte, caixa) {
   pTipus.textContent = textTipus;
   caixa.appendChild(pEdat);
 }
-async function mostrarRecompensa(url) {
+async function mostrarResultat(url) {
   const missatge = document.getElementById('missatge-cerca');
   const llistaResultats = document.getElementById('resultats-cerca');
   missatge.textContent = '';
@@ -118,17 +116,17 @@ async function mostrarRecompensa(url) {
   const dades = await resposta.json();
   console.log(dades);
 
-  if (dades.products.length === 0) {
-    missatge.textContent = 'No hi ha cap producte amb aquest nom';
+  if (dades.length === 0) {
+    missatge.textContent = 'No hi ha cap personatge amb aquest nom';
     return;
   }
 
-  missatge.textContent = `${dades.products.length} resultats`;
+  missatge.textContent = `${dades.length} resultats`;
 
-  for (const product of dades.products) {
+  for (const personat of dades) {
     const nouLi = document.createElement('li');
-    nouLi.textContent = product.title + ' ' + product.price + '€';
+    nouLi.textContent = personat.name + ' ' + personat.bounties + 'berries';
     llistaResultats.appendChild(nouLi);
-    nouLi.addEventListener('click', () => mostrarFitxa('https://dummyjson.com/products/' + product.id));
+    nouLi.addEventListener('click', () => mostrarFitxa(URL_L + personat.name));
   }
 }
