@@ -24,4 +24,10 @@ window.onload = async () => {
     const resposta = await fetch(URL_LLISTA);
     const dades = await resposta.json();
     console.log(dades);
-    const personatges = 
+    const personatges = dades;
+      for (const personat of personatges) {
+        const nouLi = document.createElement('li');
+        nouLi.textContent = personat.name;  
+        llistaRecompenses.appendChild(nouLi);
+        nouLi.addEventListener('click', () => mostrarFitxa());
+
