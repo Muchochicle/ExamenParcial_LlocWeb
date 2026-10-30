@@ -36,7 +36,7 @@ window.onload = async () => {
         nouLi.appendChild(botoAfegir);
         botoAfegir.addEventListener('click', (event) => {
         event.stopPropagation();
-        afegirCapturats(URL_LLISTA[midapers]);
+        afegirCapturats(URL_LLISTA.name[midapers]);
         });
         midapers++;
   }
@@ -52,7 +52,8 @@ async function mostrarFitxa(url) {
   const personat = await resposta.json();
   console.log(personat);
   pintarPersonatge(personat, contingut);
-  mostrarDescripcio(personat, contingut);
+  mostrarEdat(personat, contingut)
+  mostrarEstat(personat, contingut)
 }
 function pintarPersonatge(personat, caixa) {
   const nom = document.createElement('h3');
@@ -68,10 +69,6 @@ function pintarPersonatge(personat, caixa) {
   imatge.alt = personat.name;
   imatge.width = 250;
   caixa.appendChild(imatge);
-  let textTip = 'Edat:';
-  for (const edat of personat.age) {
-    textTip += ' ' + edat.age.name;
-  }
 }
 async function afegirCapturats(url) {
   const missatge = document.getElementById('missatge-capturats');
@@ -90,4 +87,48 @@ async function afegirCapturats(url) {
     missatge.textContent = '';
   });
 }
+}
+function mostrarEstat(producte, caixa) {    
+
+  let textTipus = 'Estat: ';
+  for (const state of personat.status) {
+    textTipus += ' ' + state.status.name;
+  }
+  const pEstat = document.createElement('p');
+  pTipus.textContent = textTipus;
+  caixa.appendChild(pEstat);
+}
+
+ function mostrarEdat(producte, caixa) {   
+  let textTip = 'Edat:';
+  for (const edat of personat.age) {
+    textTip += ' ' + edat.age.name;
+  }
+  const pEdat = document.createElement('p');
+  pTipus.textContent = textTipus;
+  caixa.appendChild(pEdat);
+}
+async function mostrarRecompensa(url) {
+  const missatge = document.getElementById('missatge-cerca');
+  const llistaResultats = document.getElementById('resultats-cerca');
+  missatge.textContent = '';
+  llistaResultats.textContent = '';
+
+  const resposta = await fetch(url);
+  const dades = await resposta.json();
+  console.log(dades);
+
+  if (dades.products.length === 0) {
+    missatge.textContent = 'No hi ha cap producte amb aquest nom';
+    return;
+  }
+
+  missatge.textContent = `${dades.products.length} resultats`;
+
+  for (const product of dades.products) {
+    const nouLi = document.createElement('li');
+    nouLi.textContent = product.title + ' ' + product.price + '€';
+    llistaResultats.appendChild(nouLi);
+    nouLi.addEventListener('click', () => mostrarFitxa('https://dummyjson.com/products/' + product.id));
+  }
 }
