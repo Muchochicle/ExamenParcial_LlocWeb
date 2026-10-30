@@ -45,7 +45,7 @@ async function mostrarFitxa(url) {
   contingut.textContent = '';
   const resposta = await fetch(url);
   if (!resposta.ok) {
-    contingut.textContent = 'No hi ha cap personatge amb aquest nom';
+    contingut.textContent = `No hi ha cap personatge amb aquest nom`;
     return;
   }
   const personat = await resposta.json();
@@ -53,6 +53,35 @@ async function mostrarFitxa(url) {
   pintarPersonatge(personat, contingut);
   mostrarDescripcio(personat, contingut);
 }
-function pintarPokemon(pokemon, caixa) {
+function pintarPersonatge(personat, caixa) {
+  const nom = document.createElement('h3');
+  nom.textContent = personat.name[0];
+  caixa.appendChild(nom);
+  const bounties = document.createElement('p');
+  if(personat.is_active){
+  Edat.textContent = `Recomensa: ${personat.amount}`;
+  }else{Edat.textContent = `No te recompensa activa`;}
+  caixa.appendChild(Edat);
+  const imatge = document.createElement('img');
+  imatge.src = personat.image_url;
+  imatge.alt = personat.name;
+  imatge.width = 250;
+  caixa.appendChild(imatge);
+  let textTipus = 'Edat:';
+  for (const edat of personat.age) {
+    textTipus += ' ' + edat.age.name;
+  }
+  const pEdat = document.createElement('p');
+  pTipus.textContent = textTipus;
+  caixa.appendChild(pEdat);
+
+    let textTipus = 'Estat: ';
+  for (const edat of personat.age) {
+    textTipus += ' ' + edat.age.name;
+  }
+  const pEdat = document.createElement('p');
+  pTipus.textContent = textTipus;
+  caixa.appendChild(pEdat);
+}
 
 
